@@ -1,0 +1,1297 @@
+<!doctype html>
+<!--[if !IE]>
+<html class="no-js non-ie" lang="en-US"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="no-js ie7" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en-US"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en-US"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en-US"> <!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content>
+<meta name="author" content="bezkoder" />
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+<title>Django CRUD with MySQL example | Django Rest Framework - BezKoder</title><link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin /><link rel="preconnect" href="https://fonts.googleapis.com" /><style type="text/css">@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/opensans/v36/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkWVAexQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/opensans/v36/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/opensans/v36/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1x4gaVc.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/opensans/v36/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1x4gaVc.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/robotoslab/v34/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjo0oSmb2Rm.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/robotoslab/v34/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISmb2Rm.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/robotoslab/v34/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoa4Omb2Rm.ttf) format('truetype');
+}
+</style><link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/font-awesome-line-awesome/webfonts/fa-regular-400.woff2" crossorigin /><link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/font-awesome-line-awesome/webfonts/fa-brands-400.woff2" crossorigin /><link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/fonts/glyphicons-halflings-regular.woff2" crossorigin /><link rel="preload" as="font" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.woff2" crossorigin /><link rel="stylesheet" id="siteground-optimizer-combined-css-1b3572d7bb27ce7ea30b179f97acf106" href="https://www.bezkoder.com/wp-content/uploads/siteground-optimizer-assets/siteground-optimizer-combined-css-1b3572d7bb27ce7ea30b179f97acf106.css" media="all" /> <link rel="preload" href="https://www.bezkoder.com/wp-content/uploads/siteground-optimizer-assets/siteground-optimizer-combined-css-1b3572d7bb27ce7ea30b179f97acf106.css" as="style">
+<meta name="description" content="Build Python 3/Django Rest Api with Django Rest Framework example project - Django CRUD with MySQL - Django 2 CRUD tutorial" />
+<link rel="canonical" href="https://www.bezkoder.com/django-crud-mysql-rest-framework/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Django CRUD with MySQL example | Django Rest Framework - BezKoder" />
+<meta property="og:description" content="Build Python 3/Django Rest Api with Django Rest Framework example project - Django CRUD with MySQL - Django 2 CRUD tutorial" />
+<meta property="og:url" content="https://www.bezkoder.com/django-crud-mysql-rest-framework/" />
+<meta property="og:site_name" content="BezKoder" />
+<meta property="article:publisher" content="https://www.facebook.com/bezkoder" />
+<meta property="article:published_time" content="2019-10-02T07:02:42+00:00" />
+<meta property="article:modified_time" content="2021-11-03T02:41:00+00:00" />
+<meta property="og:image" content="https://www.bezkoder.com/wp-content/uploads/2020/03/django-crud-rest-api-mysql-example-feature-image.png" />
+<meta property="og:image:width" content="750" />
+<meta property="og:image:height" content="410" />
+<meta property="og:image:type" content="image/png" />
+<meta name="author" content="bezkoder" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content="bezkoder" />
+<meta name="twitter:label2" content="Est. reading time" />
+<meta name="twitter:data2" content="11 minutes" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.bezkoder.com/django-crud-mysql-rest-framework/","url":"https://www.bezkoder.com/django-crud-mysql-rest-framework/","name":"Django CRUD with MySQL example | Django Rest Framework - BezKoder","isPartOf":{"@id":"https://www.bezkoder.com/#website"},"primaryImageOfPage":{"@id":"https://www.bezkoder.com/django-crud-mysql-rest-framework/#primaryimage"},"image":{"@id":"https://www.bezkoder.com/django-crud-mysql-rest-framework/#primaryimage"},"thumbnailUrl":"https://www.bezkoder.com/wp-content/uploads/2020/03/django-crud-rest-api-mysql-example-feature-image.png","datePublished":"2019-10-02T07:02:42+00:00","dateModified":"2021-11-03T02:41:00+00:00","author":{"@id":"https://www.bezkoder.com/#/schema/person/eb4ad162bbd76adb4fde3089aa839a5a"},"description":"Build Python 3/Django Rest Api with Django Rest Framework example project - Django CRUD with MySQL - Django 2 CRUD tutorial","breadcrumb":{"@id":"https://www.bezkoder.com/django-crud-mysql-rest-framework/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.bezkoder.com/django-crud-mysql-rest-framework/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.bezkoder.com/django-crud-mysql-rest-framework/#primaryimage","url":"https://www.bezkoder.com/wp-content/uploads/2020/03/django-crud-rest-api-mysql-example-feature-image.png","contentUrl":"https://www.bezkoder.com/wp-content/uploads/2020/03/django-crud-rest-api-mysql-example-feature-image.png","width":750,"height":410},{"@type":"BreadcrumbList","@id":"https://www.bezkoder.com/django-crud-mysql-rest-framework/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.bezkoder.com/"},{"@type":"ListItem","position":2,"name":"Django CRUD with MySQL example | Django Rest Framework"}]},{"@type":"WebSite","@id":"https://www.bezkoder.com/#website","url":"https://www.bezkoder.com/","name":"BezKoder","description":"Mobile &amp; Web App Development Tutorials","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.bezkoder.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Person","@id":"https://www.bezkoder.com/#/schema/person/eb4ad162bbd76adb4fde3089aa839a5a","name":"bezkoder","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.bezkoder.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/40150b9299e69015bc46c30598a81888?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/40150b9299e69015bc46c30598a81888?s=96&d=mm&r=g","caption":"bezkoder"},"url":"https://www.bezkoder.com/author/bezkoder/"}]}</script>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="alternate" type="application/rss+xml" title="BezKoder &raquo; Feed" href="https://www.bezkoder.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="BezKoder &raquo; Comments Feed" href="https://www.bezkoder.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="BezKoder &raquo; Django CRUD with MySQL example | Django Rest Framework Comments Feed" href="https://www.bezkoder.com/django-crud-mysql-rest-framework/feed/" />
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<style id="quads-styles-inline-css" type="text/css">
+
+    .quads-location ins.adsbygoogle {
+        background: transparent !important;
+    }
+    .quads.quads_ad_container { display: grid; grid-template-columns: auto; grid-gap: 10px; padding: 10px; }
+    .grid_image{animation: fadeIn 0.5s;-webkit-animation: fadeIn 0.5s;-moz-animation: fadeIn 0.5s;
+        -o-animation: fadeIn 0.5s;-ms-animation: fadeIn 0.5s;}
+    .quads-ad-label { font-size: 12px; text-align: center; color: #333;}
+    .quads_click_impression { display: none;}
+</style>
+<script type="41e2461fa292ff368e48fdb2-text/javascript" src="https://www.bezkoder.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<link rel="https://api.w.org/" href="https://www.bezkoder.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.bezkoder.com/wp-json/wp/v2/posts/2817" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.bezkoder.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.4.3" />
+<link rel="shortlink" href="https://www.bezkoder.com/?p=2817" />
+<link rel="alternate" type="application/json+oembed" href="https://www.bezkoder.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bezkoder.com%2Fdjango-crud-mysql-rest-framework%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.bezkoder.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bezkoder.com%2Fdjango-crud-mysql-rest-framework%2F&#038;format=xml" />
+<script async src="https://fundingchoicesmessages.google.com/i/pub-9222145312954144?ers=1" nonce="rXtwkqx90Oe6rsBXI5NpxA" type="41e2461fa292ff368e48fdb2-text/javascript"></script><style type="text/css">a:hover, a:active, #secondary .widget .post-content a:hover,
+        .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover,
+        .woocommerce nav.woocommerce-pagination ul li span.current, #secondary .widget a:hover  {color: #727272;}.social-icons li a {background-color: #8c8c8c !important ;}#footer-area .social-icons li a {background-color: #6d6d6d !important ;}.entry-content {font-family: Open Sans;}</style> <style type="text/css">
+				.navbar > .container .navbar-brand {
+			color: #dadada;
+		}
+		</style>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+<link rel="icon" href="https://www.bezkoder.com/wp-content/uploads/logo-60x60.png" sizes="32x32" />
+<link rel="icon" href="https://www.bezkoder.com/wp-content/uploads/logo.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.bezkoder.com/wp-content/uploads/logo.png" />
+<meta name="msapplication-TileImage" content="https://www.bezkoder.com/wp-content/uploads/logo.png" />
+<style type="text/css" id="wp-custom-css">
+			/*
+#logo {
+	margin-top: -15px;
+}
+*/
+
+.navbar-default .navbar-nav>li>a {
+	font-size: 14px !important;
+}
+
+.navbar-nav>li {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+code {
+	color: #555;
+	background-color: #f3f3f3 !important;
+}
+
+.h1, .h2, h1, h2 {
+	line-height: 1.3 !important;
+}
+
+pre {
+	margin-bottom: 20px !important;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+	background-color: #fafafa !important;
+	border-radius: 0px !important;
+	border: 0 !important;
+}
+
+.post-inner-content img {
+	margin-bottom: 15px;
+}
+
+#toc_container {
+	border: 0 !important;
+	padding: 15px !important;
+}
+
+.table-responsive {
+	width: 100%;
+}
+
+/* left side ad */
+.container {
+	padding-right: 0;
+	max-width: 1000px;
+}
+
+.main-content-inner {
+	max-width: 630px;
+}
+
+.post-inner-content {
+	max-width: 630px;
+}
+
+.widget-area {
+	max-width: 320px;
+}
+
+@media screen and (min-width: 868px) {
+	.main-content-inner {	
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+
+	.post-inner-content {
+		padding-top: 20px;
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
+	
+#secondary {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.well {
+	padding-left: 20px;
+	padding-right: 0px;
+}
+
+@media screen and (max-width: 768px) {
+  .my-side-ad {
+    display: none;
+  }
+}
+
+@media screen and (max-width:1260px) and (min-width:990px) {
+  .my-side-ad {
+    display: none;
+  }
+}
+
+@media screen and (min-width:800px) and (max-width:950px) {
+	.site-navigation-inner {
+		padding-left: 60px;
+	}
+	.container {
+		max-width: 680px;
+	}
+}
+
+@media screen and (min-width:768px) and (max-width:800px) {
+	.site-navigation-inner {
+		padding-left: 160px;
+	}
+	.post-inner-content, .comments-area, .post-navigation {
+		margin-left:80px;
+	}
+	.main-content-area {
+		margin-left: 50px;
+	}
+}
+
+@media screen and (max-width:990px) and (min-width:800px) {
+	.site-navigation-inner {
+		padding-left: 100px;
+	}
+	.post-inner-content {
+		margin-left:50px;
+	}
+}
+
+@media screen and (max-width:868px) and (min-width:800px) {
+	.main-content-area {
+		margin-left: 100px;
+	}
+}
+
+@media screen and (max-width:990px) and (min-width:868px) {
+	.main-content-area {
+		margin-left: 150px;
+	}
+}
+
+@media screen and (max-width:980px) and (min-width:800px) {
+	#secondary {
+		margin-left: 60px;
+	}
+}
+
+@media screen and (max-width:800px) and (min-width:768px) {
+	#secondary {
+		margin-left: 120px;
+	}
+}
+
+.comments-area, .post-navigation {
+	padding-left: 10px;
+}
+
+#menu-footer-links {
+	padding-left: 45px;
+}
+
+.my-side-ad {
+  width: 120px;
+  height: 600px;
+  min-height: 100px;
+  position: fixed;
+  top: 70px;
+  left: 0%;
+  background-color: #fff;
+}
+
+#close-side-ad-btn {
+  position: absolute;
+  left: 0;
+  top: -25px;
+	width: 25px;
+	height: 25px;
+	padding: 3px;
+	background-color: green;
+	font-size: 10px;
+	font-weight: bold;
+}		</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141701321-1" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141701321-1');
+</script>
+<script data-ad-client="ca-pub-9222145312954144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+</head>
+<body class="post-template-default single single-post postid-2817 single-format-standard custom-background group-blog">
+<a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div id="page" class="hfeed site">
+<header id="masthead" class="site-header" role="banner">
+<nav class="navbar navbar-default 
+		" role="navigation">
+<div class="container">
+<div class="row">
+<div class="site-navigation-inner col-sm-12">
+<div class="navbar-header">
+<button type="button" class="btn navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<div id="logo">
+<p class="site-name"> <a class="navbar-brand" href="https://www.bezkoder.com/" title="BezKoder" rel="home">BezKoder</a>
+</p>
+
+</div>
+</div>
+
+<div class="collapse navbar-collapse navbar-ex1-collapse"><ul id="menu-top-menu" class="nav navbar-nav"><li id="menu-item-8685" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8685"><a href="https://www.bezkoder.com/category/courses/">Courses</a></li>
+<li id="menu-item-1943" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1943"><a href="https://www.bezkoder.com/category/full-stack/">Full Stack</a></li>
+<li id="menu-item-1059" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1059"><a href="https://www.bezkoder.com/category/spring/">Spring</a></li>
+<li id="menu-item-3190" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3190"><a href="https://www.bezkoder.com/node-js-tutorial/">Node</a></li>
+<li id="menu-item-266" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-266"><a href="https://www.bezkoder.com/category/vue/">Vue</a></li>
+<li id="menu-item-2393" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2393"><a href="https://www.bezkoder.com/category/angular/">Angular</a></li>
+<li id="menu-item-3149" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3149"><a href="https://www.bezkoder.com/category/react/">React</a></li>
+<li id="menu-item-5129" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5129"><a href="https://www.bezkoder.com/category/firebase/">Firebase</a></li>
+<li id="menu-item-3150" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3150"><a href="https://www.bezkoder.com/category/django/">Django</a></li>
+<li id="menu-item-121" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-121"><a href="https://www.bezkoder.com/category/dart/">Dart</a></li>
+<li id="menu-item-2002" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2002"><a href="https://www.bezkoder.com/json-formatter/">JsonFormatter</a></li>
+<li id="menu-item-9110" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9110"><a href="https://www.bezkoder.com/categories/">Categories</a></li>
+</ul></div> </div>
+</div>
+</div>
+</nav>
+</header>
+<div id="content" class="site-content">
+<div class="top-section">
+
+</div>
+<div class="container main-content-area">
+<div class="row side-pull-left">
+<div class="main-content-inner col-sm-12 col-md-8">
+<div id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+<article id="post-2817" class="post-2817 post type-post status-publish format-standard has-post-thumbnail hentry category-django category-python tag-crud tag-django tag-django-rest-framework tag-mysql tag-python tag-rest-api">
+<div class="post-inner-content">
+<header class="entry-header page-header">
+<h1 class="entry-title ">Django CRUD with MySQL example | Django Rest Framework</h1>
+<div class="entry-meta">
+<span class="posted-on"><i class="fa fa-calendar-alt"></i> <a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/" rel="bookmark"><time class="entry-date published" datetime="2021-11-03T02:41:00+00:00">Last modified: November 3, 2021</time></a></span><span class="byline"> <i class="fa fa-user"></i> <span class="author vcard"><a class="url fn n" href="https://www.bezkoder.com/author/bezkoder/">bezkoder</a></span></span>
+<span class="cat-links"><i class="fa fa-folder-open"></i>
+<a href="https://www.bezkoder.com/category/django/" rel="category tag">Django</a>, <a href="https://www.bezkoder.com/category/python/" rel="category tag">Python</a> </span>
+</div>
+</header>
+<div class="entry-content">
+<p>In this tutorial, we&#8217;re gonna create Python 3/Django CRUD with MySQL example that uses Django Rest Framework for building Rest Apis. You&#8217;ll know:</p>
+<ul>
+<li>How to setup Django to connect with MySQL Database</li>
+<li>How to define Data Models and migrate it to MySQL</li>
+<li>Way to use Django Rest Framework to process HTTP requests</li>
+<li>Way to make Django CRUD Operations with MySQL Database</li>
+</ul>
+<p>Related Posts:<br/>
+&#8211; <a href="https://bezkoder.com/django-mongodb-crud-rest-framework/">Django &#038; MongoDB CRUD Rest API | Django Rest Framework</a><br/>
+&#8211; <a href="https://bezkoder.com/django-postgresql-crud-rest-framework/">Django &#038; PostgreSQL CRUD example | Django Rest Framework</a></p>
+<p>Fullstack:<br/>
+&#8211; <a href="https://bezkoder.com/django-angular-mysql/">Django + Angular</a><br/>
+&#8211; <a href="https://bezkoder.com/django-react-axios-rest-framework/">Django + React</a><br/>
+&#8211; <a href="https://bezkoder.com/django-react-hooks/">Django + React Hooks</a><br/>
+&#8211; <a href="https://bezkoder.com/django-vue-js-rest-framework/">Django + Vue.js</a></p>
+<p><span id="more-2817"></span><br/>
+<div id="toc_container" class="no_bullets"><p class="toc_title">Contents</p><ul class="toc_list"><li><a href="#Django_CRUD_with_MySQL_overview">Django CRUD with MySQL overview</a></li><li><a href="#Architecture">Architecture</a></li><li><a href="#Technology">Technology</a></li><li><a href="#Project_structure">Project structure</a></li><li><a href="#Install_Django_REST_framework">Install Django REST framework</a></li><li><a href="#Setup_new_Django_project">Setup new Django project</a></li><li><a href="#Connect_Django_project_to_MySQL">Connect Django project to MySQL</a></li><li><a href="#Setup_new_Django_app_for_Rest_CRUD_Api">Setup new Django app for Rest CRUD Api</a></li><li><a href="#Configure_CORS">Configure CORS</a></li><li><a href="#Define_the_Django_Model">Define the Django Model</a></li><li><a href="#Migrate_Data_Model_to_the_database">Migrate Data Model to the database</a></li><li><a href="#Create_Serializer_class_for_Data_Model">Create Serializer class for Data Model</a></li><li><a href="#Define_Routes_to_Views_functions">Define Routes to Views functions</a></li><li><a href="#Write_API_Views">Write API Views</a><ul><li><a href="#Create_a_new_object">Create a new object</a></li><li><a href="#Retrieve_objects_with_condition">Retrieve objects (with condition)</a></li><li><a href="#Retrieve_a_single_object">Retrieve a single object</a></li><li><a href="#Update_an_object">Update an object</a></li><li><a href="#Delete_an_object">Delete an object</a></li><li><a href="#Delete_all_objects">Delete all objects</a></li><li><a href="#Find_all_objects_by_condition">Find all objects by condition</a></li></ul></li><li><a href="#Test_the_CRUD_with_APIs">Test the CRUD with APIs</a></li><li><a href="#Conclusion">Conclusion</a></li><li><a href="#Further_Reading">Further Reading</a></li><li><a href="#Source_code">Source code</a></li></ul></div>
+</p>
+<h2><span id="Django_CRUD_with_MySQL_overview">Django CRUD with MySQL overview</span></h2>
+<p>We will build Rest Apis using <a href="https://www.django-rest-framework.org/">Django Rest Framework</a> that can create, retrieve, update, delete and find Tutorials by title or published status.</p>
+<p>First, we setup Django Project with a MySQL Client. Next, we create Rest Api app, add it with Django Rest Framework to the project. Next, we define data model and migrate it to the database. Then we write API Views and define Routes for handling all CRUD operations (including custom finder).</p>
+<p>The following table shows overview of the Rest APIs that will be exported:</p>
+<div class="table-responsive">
+<table class="table table-hover  table table-hover table table-hover" width="100%">
+<thead>
+<tr>
+<th>Methods</th>
+<th>Urls</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>api/tutorials</td>
+<td>get all Tutorials</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>api/tutorials/:id</td>
+<td>get Tutorial by <code>id</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>api/tutorials</td>
+<td>add new Tutorial</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>api/tutorials/:id</td>
+<td>update Tutorial by <code>id</code></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>api/tutorials/:id</td>
+<td>remove Tutorial by <code>id</code></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>api/tutorials</td>
+<td>remove all Tutorials</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>api/tutorials/published</td>
+<td>find all published Tutorials</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>api/tutorials?title=[kw]</td>
+<td>find all Tutorials which title contains <code>'kw'</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Finally, we&#8217;re gonna test the Rest Apis using Postman.</p>
+
+<div class="quads-location quads-ad1" id="quads-ad1" style="float:none;margin:15px 0 15px 0;text-align:center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9222145312954144" crossorigin="anonymous" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9222145312954144" data-ad-slot="2617909532" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<h2><span id="Architecture">Architecture</span></h2>
+<p>Let&#8217;s look at the diagram below, it shows the architecture of our Django CRUD Rest Apis App with MySQL database:</p>
+<p><img fetchpriority="high" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-archirecture.png" alt="django-mysql-crud-rest-framework-archirecture" width="660" height="300" class="alignnone size-full wp-image-2824 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-archirecture.png" alt="django-mysql-crud-rest-framework-archirecture" width="660" height="300" class="alignnone size-full wp-image-2824 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-archirecture.png 660w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-archirecture-300x136.png 300w" sizes="(max-width: 660px) 100vw, 660px" /></noscript></p>
+<ul>
+<li>HTTP requests will be matched by <strong>Url Patterns</strong> and passed to the <strong>Views</strong></li>
+<li><strong>Views</strong> processes the HTTP requests and returns HTTP responses (with the help of <strong>Serializer</strong>)</li>
+<li><strong>Serializer</strong> serializes/deserializes data model objects</li>
+<li><strong>Models</strong> contains essential fields and behaviors for CRUD Operations with MySQL Database</li>
+</ul>
+<h2><span id="Technology">Technology</span></h2>
+<ul>
+<li>Python 3.7</li>
+<li>Django 2.1.15</li>
+<li>Django Rest Framework 3.11.0</li>
+<li>PyMySQL 0.9.3</li>
+<li>django-cors-headers 3.2.1</li>
+</ul>
+<h2><span id="Project_structure">Project structure</span></h2>
+<p>This is our project structure:</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-project-structure.png" alt="django-mysql-crud-rest-framework-example-project-structure" width="230" height="357" class="alignnone size-full wp-image-2825 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-project-structure.png" alt="django-mysql-crud-rest-framework-example-project-structure" width="230" height="357" class="alignnone size-full wp-image-2825 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-project-structure.png 230w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-project-structure-193x300.png 193w" sizes="(max-width: 230px) 100vw, 230px" /></noscript></p>
+<p>Let me explain it briefly.</p>
+<ul>
+<li><em>tutorials/apps.py</em>: declares <code>TutorialsConfig</code> class (subclass of <code>django.apps.AppConfig</code>) that represents Rest CRUD Apis app and its configuration.</li>
+<li><em>bzkRestApisMySQL/settings.py</em>: contains settings for our Django project: MySQL Database engine, <code>INSTALLED_APPS</code> list with Django REST framework, Tutorials Application, CORS and <code>MIDDLEWARE</code>.</li>
+<li><em>tutorials/models.py</em>: defines Tutorial data model class (subclass of <code>django.db.models.Model</code>).</li>
+<li><em>migrations/0001_initial.py</em>: is created when we make migrations for the data model, and will be used for generating MySQL database table.</li>
+<li><em>tutorials/serializers.py</em>: manages serialization and deserialization with <code>TutorialSerializer</code> class (subclass of <code>rest_framework.serializers.ModelSerializer</code>).</li>
+<li><em>tutorials/views.py</em>: contains functions to process HTTP requests and produce HTTP responses (using <code>TutorialSerializer</code>).</li>
+<li><em>tutorials/urls.py</em>: defines URL patterns along with request functions in the Views.</li>
+<li><em>bzkRestApisMySQL/urls.py</em>: also has URL patterns that includes <code>tutorials.urls</code>, it is the root URL configurations.</li>
+</ul>
+<h2><span id="Install_Django_REST_framework">Install Django REST framework</span></h2>
+<p>Django REST framework helps us to build RESTful Web Services flexibly.</p>
+<p>To install this package, run command:<br/>
+<code>pip install djangorestframework</code></p>
+<h2><span id="Setup_new_Django_project">Setup new Django project</span></h2>
+<p>Let&#8217;s create a new Django project with command:<br/>
+<code>django-admin startproject bzkRestApisMySQL</code></p>
+
+<div class="quads-location quads-ad4" id="quads-ad4" style="float:none;margin:20px 0 20px 0;text-align:center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9222145312954144" crossorigin="anonymous" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9222145312954144" data-ad-slot="5596689762" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<p>When the process is done, you can see folder tree like this:</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create-project.png" alt="django-mysql-crud-rest-framework-example-create-project" width="210" height="145" class="alignnone size-full wp-image-2829 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create-project.png" alt="django-mysql-crud-rest-framework-example-create-project" width="210" height="145" class="alignnone size-full wp-image-2829 lazyload" /></noscript></p>
+<p>Now we open <em>settings.py</em> and add Django REST framework to the <code>INSTALLED_APPS</code> array here.</p>
+<pre><code class="language-python">INSTALLED_APPS = [
+    ...
+    # Django REST framework 
+    'rest_framework',
+]
+</code></pre>
+<h2><span id="Connect_Django_project_to_MySQL">Connect Django project to MySQL</span></h2>
+<p>We need a MySQL Client to work with MySQL database.<br/>
+In this tutorial, we&#8217;re gonna use <em>pymysql</em>.</p>
+
+<div class="quads-location quads-ad2" id="quads-ad2" style="float:none;margin:30px 0 30px 0;text-align:center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9222145312954144" data-ad-slot="8580577265"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<p>Run the command to install it: <code>pip install pymysql</code>.<br/>
+Then open <em>__init__.py</em> and write following code to import <code>pymysql</code> to our Django project:</p>
+<pre><code class="language-python">import pymysql
+ 
+pymysql.install_as_MySQLdb()
+</code></pre>
+<p>We also need to setup MySQL Database engine.<br/>
+So open <em>settings.py</em> and change declaration of <code>DATABASES</code>:</p>
+<pre><code class="language-python">DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'testdb',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+</code></pre>
+<h2><span id="Setup_new_Django_app_for_Rest_CRUD_Api">Setup new Django app for Rest CRUD Api</span></h2>
+<p>Run following commands to create new Django app <strong>tutorials</strong>:</p>
+<pre><code class="language-bash">cd bzkRestApisMySQL
+python manage.py startapp tutorials
+</code></pre>
+<p>Refresh the project directory tree, you can see it now looks like:</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create-app.png" alt="django-mysql-crud-rest-framework-example-create-app" width="230" height="301" class="alignnone size-full wp-image-2830 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create-app.png" alt="django-mysql-crud-rest-framework-example-create-app" width="230" height="301" class="alignnone size-full wp-image-2830 lazyload" /></noscript></p>
+<p>Now open <em>tutorials/apps.py</em>, you can see <code>TutorialsConfig</code> class (subclass of <code>django.apps.AppConfig</code>).<br/>
+This represents the Django app that we&#8217;ve just created with its configuration:</p>
+<pre><code class="language-python">from django.apps import AppConfig
+
+
+class TutorialsConfig(AppConfig):
+    name = 'tutorials'
+</code></pre>
+<p>Don&#8217;t forget to add this app to <code>INSTALLED_APPS</code> array in <em>settings.py</em>:</p>
+<pre><code class="language-python">INSTALLED_APPS = [
+    ...
+    # Tutorials application 
+    'tutorials.apps.TutorialsConfig',
+]
+</code></pre>
+<h2><span id="Configure_CORS">Configure CORS</span></h2>
+<p>We need to allow requests to our Django application from other origins.<br/>
+In this example, we&#8217;re gonna configure CORS to accept requests from <code>localhost:8081</code>.</p>
+<p>First, install the <em>django-cors-headers</em> library:<br/>
+<code>pip install django-cors-headers</code></p>
+<p>In <em>settings.py</em>, add configuration for CORS:</p>
+<pre><code class="language-python">INSTALLED_APPS = [
+    ...
+    # CORS
+    'corsheaders',
+]
+</code></pre>
+<p>You also need to add a middleware class to listen in on responses:</p>
+<pre><code class="language-python">MIDDLEWARE = [
+    ...
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+</code></pre>
+<p><strong><em>Note:</em></strong> <code>CorsMiddleware</code> should be placed as high as possible, especially before any middleware that can generate responses such as <code>CommonMiddleware</code>.</p>
+<p>Next, set <em>CORS_ORIGIN_ALLOW_ALL</em> and add the host to <em>CORS_ORIGIN_WHITELIST</em>:</p>
+<pre><code class="language-python">CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
+</code></pre>
+<ul>
+<li><em>CORS_ORIGIN_ALLOW_ALL</em>: If <code>True</code>, all origins will be accepted (not use the whitelist below). Defaults to <code>False</code>.</li>
+<li><em>CORS_ORIGIN_WHITELIST</em>: List of origins that are authorized to make cross-site HTTP requests. Defaults to <code>[]</code>.</li>
+</ul>
+<h2><span id="Define_the_Django_Model">Define the Django Model</span></h2>
+<p>Open <strong>tutorials</strong>/<em>models.py</em>, add <code>Tutorial</code> class as subclass of <code>django.db.models.Model</code>.<br/>
+There are 3 fields: <em>title</em>, <em>description</em>, <em>published</em>.</p>
+<pre><code class="language-python">from django.db import models
+
+
+class Tutorial(models.Model):
+    title = models.CharField(max_length=70, blank=False, default='')
+    description = models.CharField(max_length=200,blank=False, default='')
+    published = models.BooleanField(default=False)
+</code></pre>
+<p>Each field is specified as a class attribute, and each attribute maps to a database column.<br/>
+<em>id</em> field is added automatically.</p>
+<h2><span id="Migrate_Data_Model_to_the_database">Migrate Data Model to the database</span></h2>
+<p>Run the Python script: <code>python manage.py makemigrations tutorials</code>.</p>
+<p>The console will show:</p>
+<pre><code class="language-bash">Migrations for 'tutorials':
+  tutorials\migrations\0001_initial.py
+    - Create model Tutorial
+</code></pre>
+<p>Refresh the workspace, you can see new file <em>tutorials/migrations/0001_initial.py</em>.<br/>
+It includes code to create <code>Tutorial</code> data model:</p>
+<pre><code class="language-python"># Generated by Django 2.1.15
+
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    initial = True
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Tutorial',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(default='', max_length=70)),
+                ('description', models.CharField(default='', max_length=200)),
+                ('published', models.BooleanField(default=False)),
+            ],
+        ),
+    ]
+</code></pre>
+<p>The generated code defines <code>Migration</code> class (subclass of the <code>django.db.migrations.Migration</code>).<br/>
+It has operations array that contains operation for creating Customer model table: <code>migrations.CreateModel()</code>.</p>
+<p>The call to this will create a new model in the project history and a corresponding table in the database to match it.</p>
+<p>To apply the generated migration above, run the following Python script:<br/>
+<code>python manage.py migrate tutorials</code></p>
+<p>The console will show:</p>
+<pre><code class="language-bash">Operations to perform:
+  Apply all migrations: tutorials
+Running migrations:
+  Applying tutorials.0001_initial... OK
+</code></pre>
+<p>At this time, you can see that a table for <code>Tutorial</code> model was generated automatically with the name: <em><strong>tutorials_tutorial</strong></em>:</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-database-table.png" alt="django-mysql-crud-rest-framework-example-database-table" width="590" height="190" class="alignnone size-full wp-image-2840 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-database-table.png" alt="django-mysql-crud-rest-framework-example-database-table" width="590" height="190" class="alignnone size-full wp-image-2840 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-database-table.png 590w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-database-table-300x97.png 300w" sizes="(max-width: 590px) 100vw, 590px" /></noscript></p>
+<h2><span id="Create_Serializer_class_for_Data_Model">Create Serializer class for Data Model</span></h2>
+<p>Let&#8217;s create <code>TutorialSerializer</code> class that will manage serialization and deserialization from JSON.</p>
+<p>It inherit from <code>rest_framework.serializers.ModelSerializer</code> superclass which automatically populates a set of <code>fields</code> and default <code>validators</code>. We need to specify the model class here.</p>
+<p><strong>tutorials</strong>/<em>serializers.py</em></p>
+<pre><code class="language-python">from rest_framework import serializers 
+from tutorials.models import Tutorial
+ 
+ 
+class TutorialSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = Tutorial
+        fields = ('id',
+                  'title',
+                  'description',
+                  'published')
+</code></pre>
+<p>In the inner class <code>Meta</code>, we declare 2 attributes:</p>
+<ul>
+<li><code>model</code>: the model for Serializer</li>
+<li><code>fields</code>: a tuple of field names to be included in the serialization</li>
+</ul>
+<h2><span id="Define_Routes_to_Views_functions">Define Routes to Views functions</span></h2>
+<p>When a client sends request for an endpoint using HTTP request (GET, POST, PUT, DELETE), we need to determine how the server will response by defining the routes.</p>
+<p>These are our routes:</p>
+<ul>
+<li><code>/api/tutorials</code>: GET, POST, DELETE</li>
+<li><code>/api/tutorials/:id</code>: GET, PUT, DELETE</li>
+<li><code>/api/tutorials/published</code>: GET</li>
+</ul>
+<p>Create a <em>urls.py</em> inside <strong>tutorials</strong> app with <code>urlpatterns</code> containing <code>url</code>s to be matched with request functions in the <em>views.py</em>:</p>
+<pre><code class="language-python">from django.conf.urls import url 
+from tutorials import views 
+ 
+urlpatterns = [ 
+    url(r'^api/tutorials$', views.tutorial_list),
+    url(r'^api/tutorials/(?P&lt;pk>[0-9]+)$', views.tutorial_detail),
+    url(r'^api/tutorials/published$', views.tutorial_list_published)
+]
+</code></pre>
+<p>Don&#8217;t forget to include this URL patterns in root URL configurations.<br/>
+Open <strong>bzkRestApisMySQL</strong>/<em>urls.py</em> and modify the content with the following code:</p>
+<pre><code class="language-python">from django.conf.urls import url, include 
+ 
+urlpatterns = [ 
+    url(r'^', include('tutorials.urls')),
+]
+</code></pre>
+<h2><span id="Write_API_Views">Write API Views</span></h2>
+<p>We&#8217;re gonna create these API functions for CRUD Operations:<br/>
+&#8211; <code>tutorial_list()</code>: GET list of tutorials, POST a new tutorial, DELETE all tutorials<br/>
+&#8211; <code>tutorial_detail()</code>: GET / PUT / DELETE tutorial by &#8216;id&#8217;<br/>
+&#8211; <code>tutorial_list_published()</code>: GET all published tutorials</p>
+<p>Open <strong>tutorials</strong>/<em>views.py</em> and write following code:</p>
+<pre><code class="language-python">from django.shortcuts import render
+
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
+ 
+from tutorials.models import Tutorial
+from tutorials.serializers import TutorialSerializer
+from rest_framework.decorators import api_view
+
+
+@api_view(['GET', 'POST', 'DELETE'])
+def tutorial_list(request):
+    # GET list of tutorials, POST a new tutorial, DELETE all tutorials
+ 
+ 
+@api_view(['GET', 'PUT', 'DELETE'])
+def tutorial_detail(request, pk):
+    # find tutorial by pk (id)
+    try: 
+        tutorial = Tutorial.objects.get(pk=pk) 
+    except Tutorial.DoesNotExist: 
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+ 
+    # GET / PUT / DELETE tutorial
+    
+        
+@api_view(['GET'])
+def tutorial_list_published(request):
+    # GET all published tutorials
+</code></pre>
+<p>Let&#8217;s implement these functions.</p>
+<h3><span id="Create_a_new_object">Create a new object</span></h3>
+<p>Create and Save a new Tutorial:</p>
+<pre><code class="language-python">@api_view(['GET', 'POST', 'DELETE'])
+def tutorial_list(request):
+    ...
+ 
+    elif request.method == 'POST':
+        tutorial_data = JSONParser().parse(request)
+        tutorial_serializer = TutorialSerializer(data=tutorial_data)
+        if tutorial_serializer.is_valid():
+            tutorial_serializer.save()
+            return JsonResponse(tutorial_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+</code></pre>
+<h3><span id="Retrieve_objects_with_condition">Retrieve objects (with condition)</span></h3>
+<p>Retrieve all Tutorials/ find by <code>title</code> from MySQL database:</p>
+<pre><code class="language-python">@api_view(['GET', 'POST', 'DELETE'])
+def tutorial_list(request):
+    if request.method == 'GET':
+        tutorials = Tutorial.objects.all()
+        
+        title = request.GET.get('title', None)
+        if title is not None:
+            tutorials = tutorials.filter(title__icontains=title)
+        
+        tutorials_serializer = TutorialSerializer(tutorials, many=True)
+        return JsonResponse(tutorials_serializer.data, safe=False)
+        # 'safe=False' for objects serialization
+</code></pre>
+<h3><span id="Retrieve_a_single_object">Retrieve a single object</span></h3>
+<p>Find a single Tutorial with an <code>id</code>:</p>
+<pre><code class="language-python">@api_view(['GET', 'PUT', 'DELETE'])
+def tutorial_detail(request, pk):
+    # ... tutorial = Tutorial.objects.get(pk=pk)
+ 
+    if request.method == 'GET': 
+        tutorial_serializer = TutorialSerializer(tutorial) 
+        return JsonResponse(tutorial_serializer.data) 
+</code></pre>
+<h3><span id="Update_an_object">Update an object</span></h3>
+<p>Update a Tutorial by the <code>id</code> in the request:</p>
+<pre><code class="language-python">@api_view(['GET', 'PUT', 'DELETE'])
+def tutorial_detail(request, pk):
+    # ... tutorial = Tutorial.objects.get(pk=pk)
+    # ...
+ 
+    elif request.method == 'PUT': 
+        tutorial_data = JSONParser().parse(request) 
+        tutorial_serializer = TutorialSerializer(tutorial, data=tutorial_data) 
+        if tutorial_serializer.is_valid(): 
+            tutorial_serializer.save() 
+            return JsonResponse(tutorial_serializer.data) 
+        return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+</code></pre>
+<h3><span id="Delete_an_object">Delete an object</span></h3>
+<p>Delete a Tutorial with the specified <code>id</code>:</p>
+<pre><code class="language-python">@api_view(['GET', 'PUT', 'DELETE'])
+def tutorial_detail(request, pk):
+    # ... tutorial = Tutorial.objects.get(pk=pk)
+    # ...
+ 
+    elif request.method == 'DELETE': 
+        tutorial.delete() 
+        return JsonResponse({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+</code></pre>
+<h3><span id="Delete_all_objects">Delete all objects</span></h3>
+<p>Delete all Tutorials from the database:</p>
+<pre><code class="language-python">@api_view(['GET', 'POST', 'DELETE'])
+def tutorial_list(request):
+    # ...
+    
+    elif request.method == 'DELETE':
+        count = Tutorial.objects.all().delete()
+        return JsonResponse({'message': '{} Tutorials were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+</code></pre>
+<h3><span id="Find_all_objects_by_condition">Find all objects by condition</span></h3>
+<p>Find all Tutorials with <code>published = True</code>:</p>
+<pre><code class="language-python">@api_view(['GET'])
+def tutorial_list_published(request):
+    tutorials = Tutorial.objects.filter(published=True)
+        
+    if request.method == 'GET': 
+        tutorials_serializer = TutorialSerializer(tutorials, many=True)
+        return JsonResponse(tutorials_serializer.data, safe=False)
+</code></pre>
+<h2><span id="Test_the_CRUD_with_APIs">Test the CRUD with APIs</span></h2>
+<p>Run our Django Project with command: <code>python manage.py runserver 8080</code>.<br/>
+The console shows:</p>
+<pre><code class="language-bash">Performing system checks...
+
+System check identified no issues (0 silenced).
+March 26, 2020 - 15:56:15
+Django version 2.1.15, using settings 'bzkRestApisMySQL.settings'
+Starting development server at http://127.0.0.1:8080/
+Quit the server with CTRL-BREAK.
+</code></pre>
+<p>Using Postman, we&#8217;re gonna test all the Apis above.</p>
+<ol>
+<strong></p>
+<li>Create a new Tutorial using <code>POST /tutorials</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create.png" alt="django-mysql-crud-rest-framework-example-create" width="600" height="430" class="alignnone size-full wp-image-2843 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create.png" alt="django-mysql-crud-rest-framework-example-create" width="600" height="430" class="alignnone size-full wp-image-2843 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create.png 600w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-create-300x215.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></noscript></p>
+<p><strong></p>
+<li>Retrieve all Tutorials using <code>GET /tutorials</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve.png" alt="django-mysql-crud-rest-framework-example-retrieve" width="592" height="682" class="alignnone size-full wp-image-2844 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve.png" alt="django-mysql-crud-rest-framework-example-retrieve" width="592" height="682" class="alignnone size-full wp-image-2844 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve.png 592w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve-260x300.png 260w" sizes="(max-width: 592px) 100vw, 592px" /></noscript></p>
+<p><strong></p>
+<li>Update a Tutorial using <code>PUT /tutorials/:id</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update.png" alt="django-mysql-crud-rest-framework-example-update" width="600" height="440" class="alignnone size-full wp-image-2845 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update.png" alt="django-mysql-crud-rest-framework-example-update" width="600" height="440" class="alignnone size-full wp-image-2845 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update.png 600w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update-300x220.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></noscript></p>
+<p>Check <code>tutorials_tutorial</code> table after some rows were updated:</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update-db.png" alt="django-mysql-crud-rest-framework-example-update-db" width="530" height="200" class="alignnone size-full wp-image-2846 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update-db.png" alt="django-mysql-crud-rest-framework-example-update-db" width="530" height="200" class="alignnone size-full wp-image-2846 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update-db.png 530w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-update-db-300x113.png 300w" sizes="(max-width: 530px) 100vw, 530px" /></noscript></p>
+<p><strong></p>
+<li>Retrieve a single Tutorial by id using <code>GET /tutorials/:id</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve-one.png" alt="django-mysql-crud-rest-framework-example-retrieve-one" width="600" height="266" class="alignnone size-full wp-image-2847 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve-one.png" alt="django-mysql-crud-rest-framework-example-retrieve-one" width="600" height="266" class="alignnone size-full wp-image-2847 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve-one.png 600w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-retrieve-one-300x133.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></noscript></p>
+<p><strong></p>
+<li>Find all Tutorials which title contains &#8216;ud&#8217;: <code>GET /tutorials?title=ud</code></li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-by-title.png" alt="django-mysql-crud-rest-framework-example-find-by-title" width="590" height="390" class="alignnone size-full wp-image-2848 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-by-title.png" alt="django-mysql-crud-rest-framework-example-find-by-title" width="590" height="390" class="alignnone size-full wp-image-2848 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-by-title.png 590w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-by-title-300x198.png 300w" sizes="(max-width: 590px) 100vw, 590px" /></noscript></p>
+<p><strong></p>
+<li>Find all published Tutorials using <code>GET /tutorials/published</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-published.png" alt="django-mysql-crud-rest-framework-example-find-published" width="600" height="486" class="alignnone size-full wp-image-2849 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-published.png" alt="django-mysql-crud-rest-framework-example-find-published" width="600" height="486" class="alignnone size-full wp-image-2849 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-published.png 600w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-find-published-300x243.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></noscript></p>
+<p><strong></p>
+<li>Delete a Tutorial using <code>DELETE /tutorials/:id</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one.png" alt="django-mysql-crud-rest-framework-example-delete-one" width="600" height="220" class="alignnone size-full wp-image-2850 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one.png" alt="django-mysql-crud-rest-framework-example-delete-one" width="600" height="220" class="alignnone size-full wp-image-2850 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one.png 600w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one-300x110.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></noscript></p>
+<p>Tutorial with id=4 was removed from <code>tutorials</code> table:</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one-db.png" alt="django-mysql-crud-rest-framework-example-delete-one-db" width="540" height="192" class="alignnone size-full wp-image-2851 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one-db.png" alt="django-mysql-crud-rest-framework-example-delete-one-db" width="540" height="192" class="alignnone size-full wp-image-2851 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one-db.png 540w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-one-db-300x107.png 300w" sizes="(max-width: 540px) 100vw, 540px" /></noscript></p>
+<p><strong></p>
+<li>Delete all Tutorials using <code>DELETE /tutorials</code> Api</li>
+<p></strong><br/>
+<img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-all.png" alt="django-mysql-crud-rest-framework-example-delete-all" width="592" height="220" class="alignnone size-full wp-image-2852 lazyload" /><noscript><img decoding="async" src="https://bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-all.png" alt="django-mysql-crud-rest-framework-example-delete-all" width="592" height="220" class="alignnone size-full wp-image-2852 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-all.png 592w, https://www.bezkoder.com/wp-content/uploads/2020/03/django-mysql-crud-rest-framework-example-delete-all-300x111.png 300w" sizes="(max-width: 592px) 100vw, 592px" /></noscript></p>
+</ol>
+<p>You can use the <a href="https://www.bezkoder.com/axios-request/">Simple HTTP Client using Axios</a> to check it.</p>
+<p><img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://www.bezkoder.com/wp-content/uploads/2021/07/axios-request-example-get-post-put-delete.png" alt="axios-request-example-get-post-put-delete" width="600" height="920" class="alignnone size-full wp-image-8594 lazyload" /><noscript><img decoding="async" src="https://www.bezkoder.com/wp-content/uploads/2021/07/axios-request-example-get-post-put-delete.png" alt="axios-request-example-get-post-put-delete" width="600" height="920" class="alignnone size-full wp-image-8594 lazyload" srcset="https://www.bezkoder.com/wp-content/uploads/2021/07/axios-request-example-get-post-put-delete.png 600w, https://www.bezkoder.com/wp-content/uploads/2021/07/axios-request-example-get-post-put-delete-196x300.png 196w" sizes="(max-width: 600px) 100vw, 600px" /></noscript></p>
+<p>Or: <a href="https://www.bezkoder.com/javascript-fetch/">Simple HTTP Client using Fetch API</a></p>
+<h2><span id="Conclusion">Conclusion</span></h2>
+<p>Today, we&#8217;ve learned how to create Python 3/Django CRUD MySQL example Django Rest Framework for Rest Apis. We also know way to connect Django application with MySQL database, create a Django Model, migrate it to database, write the Views and define Url patterns for handling all CRUD operations.</p>
+<p>Happy learning! See you again.</p>
+<h2><span id="Further_Reading">Further Reading</span></h2>
+<ul>
+<li><a href="https://www.django-rest-framework.org/tutorial/quickstart/">Django Rest Framework quich start</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/topics/db/models/">Django Model</a></li>
+<li><a href="https://github.com/PyMySQL/PyMySQL">https://github.com/PyMySQL/PyMySQL</a></li>
+<li><a href="https://github.com/adamchainz/django-cors-headers">https://github.com/adamchainz/django-cors-headers</a></li>
+</ul>
+<p>Fullstack CRUD App:</p>
+<ul>
+<li><a href="https://bezkoder.com/django-angular-mysql/">Django + Angular</a></li>
+<li><a href="https://bezkoder.com/django-react-axios-rest-framework/">Django + React</a></li>
+<li><a href="https://bezkoder.com/django-react-hooks/">Django + React Hooks</a></li>
+<li><a href="https://bezkoder.com/django-vue-js-rest-framework/">Django + Vue</a></li>
+</ul>
+<h2><span id="Source_code">Source code</span></h2>
+<p>You can find the complete source code for this example on <a href="https://github.com/bezkoder/django-rest-api-mysql">Github</a>.
+
+<div class="quads-location quads-ad3" id="quads-ad3" style="float:none;margin:30px 0 30px 0;text-align:center;">
+<div class="aicp">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9222145312954144" data-ad-slot="4842295194"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+
+</div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+<ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-9222145312954144" data-ad-slot="2534441724"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+				 (adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+<footer class="entry-meta">
+
+<div class="tagcloud">
+<a href="https://www.bezkoder.com/tag/crud/">crud</a> <a href="https://www.bezkoder.com/tag/django/">django</a> <a href="https://www.bezkoder.com/tag/django-rest-framework/">django rest framework</a> <a href="https://www.bezkoder.com/tag/mysql/">mysql</a> <a href="https://www.bezkoder.com/tag/python/">python</a> <a href="https://www.bezkoder.com/tag/rest-api/">rest api</a>
+</div>
+
+</footer>
+</div>
+</article>
+<div id="comments" class="comments-area">
+<h2 class="comments-title">
+10 thoughts to &ldquo;Django CRUD with MySQL example | Django Rest Framework&rdquo; </h2>
+<ol class="comment-list">
+<li id="comment-22753" class="comment even thread-even depth-1">
+<article id="div-comment-22753" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/049b32b39397a4dc2b8815e4125786d5?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/049b32b39397a4dc2b8815e4125786d5?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/049b32b39397a4dc2b8815e4125786d5?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/049b32b39397a4dc2b8815e4125786d5?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">Antonio Jose Rodriguez</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-22753"><time datetime="2022-05-26T00:16:59+00:00">May 26, 2022 at 12:16 am</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.</p>
+<p>Change the urls Code by.</p>
+<p>At tutorials urls.py</p>
+<pre><code class="language-python">from django.urls import re_path 
+from tutorials import views 
+ 
+urlpatterns = [ 
+    re_path (r'^api/tutorials$', views.tutorial_list),
+    re_path (r'^api/tutorials/(?P[0-9]+)$', views.tutorial_detail),
+    re_path (r'^api/tutorials/published$', views.tutorial_list_published)
+]
+</code></pre>
+<p>At principal urls.py </p>
+<pre><code class="language-python">from django.urls import include, re_path
+urlpatterns = [
+    re_path(r'^', include('tutorials.urls')),
+]
+</code></pre>
+</div>
+</article>
+</li>
+<li id="comment-20819" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="div-comment-20819" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/878f360fd5609494b1b12662ea0952fe?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/878f360fd5609494b1b12662ea0952fe?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/878f360fd5609494b1b12662ea0952fe?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/878f360fd5609494b1b12662ea0952fe?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">VW</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-20819"><time datetime="2022-04-06T00:24:07+00:00">April 6, 2022 at 12:24 am</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Thanks for finally writing about &gt; Django MySQL CRUD MySQL example. Loved it!</p>
+</div>
+</article>
+</li>
+<li id="comment-10564" class="comment even thread-even depth-1">
+<article id="div-comment-10564" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/bea1516e8e0c555259d0843601a29b9b?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/bea1516e8e0c555259d0843601a29b9b?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/bea1516e8e0c555259d0843601a29b9b?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/bea1516e8e0c555259d0843601a29b9b?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">SARATHKUMAR R</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-10564"><time datetime="2021-08-08T14:09:19+00:00">August 8, 2021 at 2:09 pm</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>can you anyone pls explain about resp api framework django, i am not clear about the rest api,<br/>
+i think myself rest api work on http respone , so rest framework works on local server what we connected from that we can used our crud operation or someother thing &#8212;&#8211; is that correct about rest framework what i explained above</p>
+</div>
+</article>
+</li>
+<li id="comment-10447" class="comment odd alt thread-odd thread-alt depth-1 parent">
+<article id="div-comment-10447" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">Obert</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-10447"><time datetime="2021-08-05T09:44:58+00:00">August 5, 2021 at 9:44 am</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Hi, really nice demo. I have the following questions:</p>
+<p>1. Where are the HTML templates for nice forms in this project, i dont see them.<br/>
+2. What IDE did you use. It seems simple and elegant.</p>
+</div>
+</article>
+<ol class="children">
+<li id="comment-10466" class="comment byuser comment-author-bezkoder bypostauthor even depth-2 parent">
+<article id="div-comment-10466" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/40150b9299e69015bc46c30598a81888?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/40150b9299e69015bc46c30598a81888?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/40150b9299e69015bc46c30598a81888?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/40150b9299e69015bc46c30598a81888?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">bezkoder</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-10466"><time datetime="2021-08-06T02:43:04+00:00">August 6, 2021 at 2:43 am</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Hi Obert,</p>
+<p>1. The UI template is built with Angular/React/Vue Client that I mention in the tutorial.<br/>
+2. I use Eclipse IDE 🙂</p>
+</div>
+</article>
+<ol class="children">
+<li id="comment-10475" class="comment odd alt depth-3">
+<article id="div-comment-10475" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/a5f4b9b98da430fa43c4800cf44a59fd?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">Obert</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-10475"><time datetime="2021-08-06T07:11:00+00:00">August 6, 2021 at 7:11 am</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Thanks hey. When i downloaded the source code from github. The templates where not there. It would have been nice had u included them as well in the project source code. If you could consider this the better even as part of this tutorial such that there will be no loose ends for someone learning</p>
+</div>
+</article>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="comment-5428" class="comment even thread-even depth-1">
+<article id="div-comment-5428" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/5a2cfbd15f3f03f0737b71a646a6aa79?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/5a2cfbd15f3f03f0737b71a646a6aa79?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/5a2cfbd15f3f03f0737b71a646a6aa79?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/5a2cfbd15f3f03f0737b71a646a6aa79?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">Guilfoo</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-5428"><time datetime="2020-11-16T23:42:45+00:00">November 16, 2020 at 11:42 pm</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Hello. magnificent Django tutorial. Thanks!</p>
+</div>
+</article>
+</li>
+<li id="comment-5216" class="comment odd alt thread-odd thread-alt depth-1 parent">
+<article id="div-comment-5216" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/07b064982280fb274b3cb1b58a2323ad?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/07b064982280fb274b3cb1b58a2323ad?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/07b064982280fb274b3cb1b58a2323ad?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/07b064982280fb274b3cb1b58a2323ad?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">Hunter</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-5216"><time datetime="2020-10-27T19:51:14+00:00">October 27, 2020 at 7:51 pm</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Should we create serializers.py ourselves?</p>
+</div>
+</article>
+<ol class="children">
+<li id="comment-15091" class="comment even depth-2">
+<article id="div-comment-15091" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/438c21595bf9d6b4560c9fef8bf5b784?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/438c21595bf9d6b4560c9fef8bf5b784?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/438c21595bf9d6b4560c9fef8bf5b784?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/438c21595bf9d6b4560c9fef8bf5b784?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">DanKa</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-15091"><time datetime="2021-11-10T17:48:17+00:00">November 10, 2021 at 5:48 pm</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>Yes, you can copy the text from github</p>
+</div>
+</article>
+</li>
+</ol>
+</li>
+<li id="comment-4080" class="comment odd alt thread-even depth-1">
+<article id="div-comment-4080" class="comment-body">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="https://secure.gravatar.com/avatar/c377e11cc6db3e8bd1a988ae9950dbbd?s=60&#038;d=mm&#038;r=g" data-srcset="https://secure.gravatar.com/avatar/c377e11cc6db3e8bd1a988ae9950dbbd?s=120&#038;d=mm&#038;r=g 2x" class="avatar avatar-60 photo lazyload" height="60" width="60" decoding="async" /><noscript><img alt='' src='https://secure.gravatar.com/avatar/c377e11cc6db3e8bd1a988ae9950dbbd?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c377e11cc6db3e8bd1a988ae9950dbbd?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo lazyload' height='60' width='60' decoding='async'/></noscript> <b class="fn">Muhammad Ayaz</b> <span class="says">says:</span> </div>
+<div class="comment-metadata">
+<a href="https://www.bezkoder.com/django-crud-mysql-rest-framework/#comment-4080"><time datetime="2020-07-30T08:35:02+00:00">July 30, 2020 at 8:35 am</time></a> </div>
+</footer>
+<div class="comment-content">
+<p>For MySql, phpmyadmin should be running<br/>
+you can use Xampp for that</p>
+</div>
+</article>
+</li>
+</ol>
+<p class="no-comments">Comments are closed to reduce spam. If you have any question, please send me an email.</p>
+</div>
+<nav class="navigation post-navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="https://www.bezkoder.com/vue-axios-file-upload/" rel="prev"><i class="fa fa-chevron-left"></i> <span class="post-title">Vue File Upload example using Axios</span></a></div><div class="nav-next"><a href="https://www.bezkoder.com/sequelize-associate-one-to-many/" rel="next"><span class="post-title">Sequelize One-to-Many Association example with Node.js &#038; MySQL <i class="fa fa-chevron-right"></i></span></a></div></div>
+</nav>
+</main>
+</div>
+</div>
+<div id="secondary" class="widget-area col-sm-12 col-md-4" role="complementary">
+<div class="well">
+<aside id="search-4" class="widget widget_search">
+<form role="search" method="get" class="form-search" action="https://www.bezkoder.com/">
+<div class="input-group">
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" class="form-control search-query" placeholder="Search&hellip;" value name="s" title="Search for:" />
+<span class="input-group-btn">
+<button type="submit" class="btn btn-default" name="submit" id="searchsubmit" value="Search"><span class="glyphicon glyphicon-search"></span></button>
+</span>
+</div>
+</form>
+</aside><aside id="custom_html-13" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div class="aicp">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9222145312954144" crossorigin="anonymous" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9222145312954144" data-ad-slot="9463360895" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div></div></aside><aside id="custom_html-4" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div class="aicp" id="bottom-fixed-widget">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9222145312954144" crossorigin="anonymous" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-9222145312954144" data-ad-slot="2128162633"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div></div></aside> </div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer-area" style="margin-top: 50px;">
+<div class="container footer-inner">
+<div class="row">
+<div class="footer-widget-area">
+<div class="col-sm-4 footer-widget" role="complementary">
+<div id="custom_html-14" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><a href="https://www.buymeacoffee.com/bezkoder" rel="nofollow noopener" target="_blank"><img src="https://www.bezkoder.com/wp-content/uploads/donation.png" alt="Buy me a coffee" style="width:160px;height:40px;"></a></div></div> </div>
+<div class="col-sm-4 footer-widget" role="complementary">
+<div id="sparkling-social-3" class="widget sparkling-social"><h3 class="widgettitle">Follow us</h3>
+
+<div class="social-icons sticky-sidebar-social">
+<nav id="menu-social" class="social-icons"><ul id="menu-social-items" class="social-menu"><li id="menu-item-32" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-32"><a href="https://facebook.com/bezkoder"><i class="social_icon"><span>Facebook</span></i></a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a href="https://www.youtube.com/channel/UCp0mx9RH0JxaFsmMvKXA86Q"><i class="social_icon"><span>Youtube</span></i></a></li>
+<li id="menu-item-1212" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1212"><a href="https://github.com/bezkoder"><i class="social_icon"><span>Github</span></i></a></li>
+</ul></nav>
+</div>
+</div> </div>
+<div class="col-sm-4 footer-widget" role="complementary">
+<div id="nav_menu-2" class="widget widget_nav_menu"><h3 class="widgettitle">Tools</h3><div class="menu-tools-container"><ul id="menu-tools" class="menu"><li id="menu-item-2008" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2008"><a href="https://www.bezkoder.com/json-formatter/">Json Formatter</a></li>
+</ul></div></div> </div>
+</div>
+</div>
+</div>
+<footer id="colophon" class="site-footer" role="contentinfo">
+<div class="site-info container">
+<div class="row">
+<nav role="navigation" class="col-md-6">
+<ul id="menu-footer-links" class="nav footer-nav clearfix"><li id="menu-item-12764" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12764"><a>.</a></li>
+<li id="menu-item-130" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-130"><a rel="privacy-policy" href="https://www.bezkoder.com/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142"><a href="https://www.bezkoder.com/contact-us/">Contact</a></li>
+<li id="menu-item-141" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141"><a href="https://www.bezkoder.com/about/">About</a></li>
+</ul> </nav>
+<div class="copyright col-md-6">
+<a href="//www.dmca.com/Protection/Status.aspx?ID=3f543dd5-c6d8-4208-9a6b-0e92057fd597" title="DMCA.com Protection Status" class="dmca-badge"> <img width="150" heigh="30" src="https://images.dmca.com/Badges/dmca-badge-w150-5x1-08.png?ID=3f543dd5-c6d8-4208-9a6b-0e92057fd597" alt="DMCA.com Protection Status" /></a>
+© 2019-2022 bezkoder.com 
+</div>
+</div>
+</div>
+<div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+</footer>
+</div>
+</div>
+<div class="my-side-ad">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9222145312954144" crossorigin="anonymous" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:120px;height:600px" data-ad-client="ca-pub-9222145312954144" data-ad-slot="2454970851"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<style type="text/css">
+    
+        #wpfront-notification-bar
+        {
+        background: #ffffff;
+        background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ffffff));
+        background: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 100%);
+        background: -o-linear-gradient(top, #ffffff 0%,#ffffff 100%);
+        background: -ms-linear-gradient(top, #ffffff 0%,#ffffff 100%);
+        background: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
+        }
+                #wpfront-notification-bar div.wpfront-message
+        {
+        color: #ffffff;
+        }
+
+                #wpfront-notification-bar a.wpfront-button
+        {
+        background: #00b7ea;
+        background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b7ea), color-stop(100%,#009ec3));
+        background: -webkit-linear-gradient(top, #00b7ea 0%,#009ec3 100%);
+        background: -o-linear-gradient(top, #00b7ea 0%,#009ec3 100%);
+        background: -ms-linear-gradient(top, #00b7ea 0%,#009ec3 100%);
+        background: linear-gradient(to bottom, #00b7ea 0%, #009ec3 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 );
+
+        color: #ffffff;
+        }
+                #wpfront-notification-bar-open-button
+        {
+        background-color: #00b7ea;
+                }
+                    #wpfront-notification-bar-open-button.top 
+            {
+            background-image: url(https://www.bezkoder.com/wp-content/plugins/wpfront-notification-bar/images/arrow_down.png);
+            }
+
+            #wpfront-notification-bar-open-button.bottom 
+            {
+            background-image: url(https://www.bezkoder.com/wp-content/plugins/wpfront-notification-bar/images/arrow_up.png);
+            }
+                    #wpfront-notification-bar  div.wpfront-close
+        {
+        border: 1px solid #555555;
+        background-color: #555555;
+        color: #000000;
+        }
+                #wpfront-notification-bar  div.wpfront-close:hover
+        {
+        border: 1px solid #aaaaaa;
+        background-color: #aaaaaa;
+        }
+        @media screen and (max-device-width: 728px) { #wpfront-notification-bar-spacer  { display:none; } }@media screen and (max-width: 728px) { #wpfront-notification-bar-spacer  { display:none; } }    </style>
+<div id="wpfront-notification-bar-spacer" class="hidden">
+<div id="wpfront-notification-bar-open-button" aria-label="reopen" class="hidden bottom wpfront-top-shadow"></div>
+<div id="wpfront-notification-bar" class="wpfront-fixed   bottom ">
+<div aria-label="close" class="wpfront-close">X</div>
+<table border="0" cellspacing="0" cellpadding="0" role="presentation">
+<tr>
+<td>
+<div class="wpfront-message">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="41e2461fa292ff368e48fdb2-text/javascript"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-9222145312954144" data-ad-slot="7632902616"></ins>
+<script type="41e2461fa292ff368e48fdb2-text/javascript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> </div>
+<div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<script type="41e2461fa292ff368e48fdb2-text/javascript" id="toc-front-js-extra">
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+/* ]]> */
+</script>
+<script type="41e2461fa292ff368e48fdb2-text/javascript" id="q2w3_fixed_widget-js-extra">
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"sidebar-1","use_sticky_position":true,"margin_top":10,"margin_bottom":530,"stop_elements_selectors":"footer-area","screen_max_width":900,"screen_max_height":0,"widgets":["#custom_html-4"]}];
+var q2w3_sidebar_options = [{"sidebar":"sidebar-1","use_sticky_position":true,"margin_top":10,"margin_bottom":530,"stop_elements_selectors":"footer-area","screen_max_width":900,"screen_max_height":0,"widgets":["#custom_html-4"]}];
+/* ]]> */
+</script>
+<script defer src="https://www.bezkoder.com/wp-content/uploads/siteground-optimizer-assets/siteground-optimizer-combined-js-04c3e5f224eab0b03c1c38be6f4d436a.js" type="41e2461fa292ff368e48fdb2-text/javascript"></script><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="41e2461fa292ff368e48fdb2-|49" defer></script></body>
+</html>
