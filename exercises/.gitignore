@@ -1,0 +1,97 @@
+# ==========================================
+# 1. System Files (OS Specific)
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ==========================================
+# 2. IDEs and Code Editors
+# ==========================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ / WebStorm / PyCharm / Android Studio
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# ==========================================
+# 3. Environment Variables and Secrets
+# ==========================================
+# Never commit credentials, tokens, or API keys
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# ==========================================
+# 4. Package Managers and Dependencies
+# ==========================================
+# Node.js
+node_modules/
+jspm_packages/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Ruby / Bundler
+.bundle/
+vendor/bundle/
+
+# ==========================================
+# 5. Build, Output, and Log Files
+# ==========================================
+# Build directories
+dist/
+build/
+out/
+bin/
+obj/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Crash dumps
+drwtsn32.log
+ntuser.dat.log
+
+# ==========================================
+# 6. Test and Diagnostic Outputs
+# ==========================================
+.coverage
+.htmlcov/
+coverage/
+.pytest_cache/
+
